@@ -1,0 +1,77 @@
+{% extends 'store/nav-footer.html' %}
+{% load static %}
+{% block content %}
+<div class=" mb-0" style="background:linear-gradient(-45deg,rgb(243, 106, 156),rgb(190, 204, 242),rgb(3, 80, 245))">
+<div class=" container  mb-0">
+     <h1>My Cart</h1>
+     <br>
+     
+     {% if order.user.is_fished  %}
+     <h3>no product </h3>
+     {% else %}
+     <h5 class="">
+      
+     {% if orderdetails %}
+        FullNmae: {{order.user.first_name|add:' '|add:order.user.last_name}}
+
+        <a href="{% url 'checkout' %}" class="btn btn-outline-primary text-danger float-end bg-primary m-5">checkout</a>
+         
+      </h5>
+     <br>
+      <h5 >
+         TotalPraice: {{total}}$
+     </h5>
+     
+     <hr>
+     <table style="border:solid 1px #848" class="table  table-hover mb-0 ">
+      
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+           
+            <th scope="col">Imag</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">SubTotal</th>
+            <th scope="col">Control</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for line in orderdetails %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            
+            <td><img src="{{line.product.img.url}}" style="width:80px;height:80px"></td>
+            
+            <td>
+              <a href="{% url 'sub_qty' orderdetails_id=line.id %}" class="btn btn-outline-primary  ">-</a>
+              {{line.quantity}}
+              <a href="{% url 'add_qty' orderdetails_id=line.id  %}" class="btn btn-outline-primary ">+</a>
+            </td>
+           
+            <td>{{line.product.price}}</td>
+            <td> {% widthratio line.quantity 1 line.product.price %}$</td>
+            <td><a href="{% url 'remove_from_cart' orderdetails_id=line.id %}" class="btn btn-outline-danger btn-sm">Remove</a></td>
+           
+          </tr>
+          {% empty %}
+        
+            <h5>NO details heare<a href="{% url 'product' %}" >All Product</a> </h5>
+        
+          {% endfor %}
+         
+        </tbody>
+      </table>
+
+    
+
+     {% else %}
+    <div  class="p-5 mb-0">
+     <h3 class="mb-0">No order heare<a href="{% url 'product' %}" >All Product0000000</a></h3>
+    </div>
+     {% endif %}
+     {% endif %}
+ </div>
+ </div>
+  
+{% endblock content %}

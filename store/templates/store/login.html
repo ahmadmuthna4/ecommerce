@@ -1,0 +1,53 @@
+{% extends 'store/nav-footer.html' %}
+{% load static %}
+{% block content %}
+<!-- login -->
+<div class="color  ">
+<div class="container">
+    <form method="POST" >
+      {% csrf_token %}
+      <h1>Login</h1>
+      <br>
+    {% include "store/messages.html" %}
+      <div class="">
+          <label for="exampleInputEmail1" class="form-label">First Name:</label>
+          <input type="text" name="fname" value="{{fname}}" class="form-control" id="exampleInputEmail1" required="" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Last Name:</label>
+          <input type="text" name="lname" value="{{lname}}" class="form-control" id="exampleInputEmail1" required="" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Adress:</label>
+          <input type="text" name="adress" value="{{adress}}" class="form-control" id="exampleInputEmail1" required="" aria-describedby="emailHelp">
+        </div>
+      <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">City:</label>
+          <input type="text" name="city" value="{{city}}" class="form-control" id="exampleInputEmail1" required="" aria-describedby="emailHelp">
+        </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address:</label>
+        <input type="email" name="email" value="{{email}}" class="form-control" id="exampleInputEmail1" required="" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">username:</label>
+        <input type="username" name="username" value="...." class="form-control" id="exampleInputEmail1" required="" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Password:</label>
+        <input type="password" name="password" value="" class="form-control" id="exampleInputEmail1" required="" aria-describedby="emailHelp">
+      </div>
+     
+     
+      
+     
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <br>
+    <span>if you have acount<a href="{% url 'singup' %}"> ...SingUp</a></span>
+    </form>
+ 
+  </div>
+  </div>
+
+
+{% endblock content %}

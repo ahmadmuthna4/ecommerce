@@ -1,0 +1,71 @@
+{% extends 'store/nav-footer.html' %}
+{% load static %}
+{% block content %}
+  <!-- product details -->
+  <div class="bgimg  ">
+  <div class="container ">
+    <div class="card p-5 color" >
+      <div class="row g-0 text-center">
+        {% include "store/messages.html" %}
+        <div class="col-md-4 col-xl-6">
+          <img style="width:400px;height:400px" src="{{pro.img.url}}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div  class="col-md-8 col-xl-6 ">
+          <div  class="card-body">
+            <h5 style="font-size:35px;font-weight: bold; "  class="card-title text-right float-left">
+              {{pro.name}}
+              {% if request.user.is_authenticated and  not request.user.username == 'admin'   %}
+              <a href="{% url 'like_product' pro.id  %}"><svg  xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill text-danger" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+              </svg></a>
+              {% else %}
+              <a href="{% url 'login'  %}"><svg  xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill text-danger" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+              </svg></a>
+              {% endif %}
+            </h5>
+            <br>
+            <p  class="card-text ">{{pro.price}}$</p>
+            <p  class="card-text">{{pro.descriotion}}</p>
+            {% if request.user.is_authenticated and  not request.user.username == 'admin'   %}
+            <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Card</button>
+            {% else %}
+            <a href="{% url 'login'  %}">
+              <button  class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Card</button>
+            </a>
+            {% endif %}
+
+             <!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Enter Quantity</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method='GET' action="{% url 'add_to_cart'%}">
+          <div class="modal-body">
+            <label for="examplqut" class="form-label">Quantity:</label>
+            <input type="text" name="quantity" value=1 class="form-control" id="examplqut" required="" aria-describedby="emailHelp">
+            <input type="hidden" name="pro_id" value="{{pro.id}}">
+            <input type="hidden" name="price" value="{{pro.price}}">
+          </div>
+      
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="" class="btn btn-primary">Confirm</button>
+          </div>
+        </form>    
+    </div>
+  </div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+{% endblock content %}
+

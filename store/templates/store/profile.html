@@ -1,0 +1,32 @@
+{% extends 'store/nav-footer.html' %}
+{% load static %}
+{% block content %}
+
+<p> <a style="color:#000;margin:50px;font-size:22px" href="{% url 'logout' %}">Log Out</a></p>
+
+<div  class="">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 ">
+          <div class="item1">
+            {% if userinfo.img  %}
+            <img style="width:200px;height:200px;border-radius: 50%;margin-left:450px" src="{{userinfo.img.url}}" class="card-img-top mt-5 mb-5" alt="...">
+
+            {% else %}
+            <div class="img_item "><img class="border border-primary mb-5" src=" {% static 'imag/man_weman/6.jpg' %} " alt=""></div>
+
+            {% endif %}
+              <div style="text-align:left;color: black;" class="datel_item border border-primary">
+                  <p>{{userinfo.user.first_name}} {{userinfo.user.last_name}}</p>
+                  <p>{{userinfo.adress}}</p>
+                  
+                  
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
+</div> 
+
+
+{% endblock content %}
